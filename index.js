@@ -88,8 +88,24 @@ app.get("/api/distancia", (req, res) => {
     res.send({message: resultado})
 })
 
-app.post("")
+//Exercício 06
+//
+
+app.post("/api/duracao", (req, res) => {
+    const segundos = req.body.segundos
+
+    const horas = segundos / 3600
+    const minutos = (segundos % 3600) / 60//3600%3600=1/60 
+    
+    const seg = segundos % 60
+
+    res.send({message: horas + "horas " + minutos + "minutos " + seg + "segundos"})
+})
+
+
 
 app.listen(3000, () => {
     console.log("Servidor na porta 3000")
 }) 
+
+

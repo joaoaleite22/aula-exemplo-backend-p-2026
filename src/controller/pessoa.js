@@ -1,64 +1,62 @@
 import ServicePessoa from '../service/pessoa.js'
 
 class ControllerPessoa {
-    Buscar(req, res) {
-        try{
-            const nomes = ServicePessoa.Buscar()
+
+    async Buscar(req, res) {
+        try {
+            const nomes = await ServicePessoa.Buscar()
 
             res.send({ nomes })
-        }catch (e){
-            res.send({message: e.message})
+        } catch (e) {
+            res.send({ message: e.message })
         }
     }
 
     BuscarUm(req, res) {
         try {
             const id = req.params.id
-
             const nome = ServicePessoa.BuscarUm(id)
-           
+
             res.send({ nome })
         } catch (error) {
             res.send({ message: error.message })
         }
     }
 
-    Criar(req, res) {
+    async Criar(req, res) {
         try {
             const nome = req.body.nome
+            const idade = req.body.idade
+            await ServicePessoa.Criar(nome, idade)
 
-            ServicePessoa.Criar(nome)
             res.send({ message: "Criado com sucesso!" })
         } catch (error) {
             res.send({ message: error.message })
         }
     }
-
-    Alterar(req, res) {
+    
+    async Alterar(req, res) {
         try {
             const id = req.params.id
             const nome = req.body.nome
+            await ServicePessoa.Alterar(id, nome)
 
-            ServicePessoa.Alterar(id, nome)
-            
-            res.send({ message: "Alterado com sucesso" })
+            res.send({ message: "Alterado com sucesso!" })
         } catch (error) {
             res.send({ message: error.message })
         }
     }
-
-    Deletar(idme) {
+    
+    async Deletar(req, res) {
         try {
             const id = req.params.id
-        
-            cServicePessoa.Deletar(id)
-            res.send({ message: "Deletado com sucesso" })
+            await ServicePessoa.Deletar(id)
+            
+            res.send({ message: "Deletado com sucesso!" })
         } catch (error) {
             res.send({ message: error.message })
         }
     }
-
-   
 
 }
 

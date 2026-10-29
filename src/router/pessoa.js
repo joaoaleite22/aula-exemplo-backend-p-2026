@@ -9,5 +9,4 @@ router.post("/criar", ControllerPessoa.Criar)
 router.put("/alterar/:id", ControllerPessoa.Alterar)
 router.delete("/deletar/:id", ControllerPessoa.Deletar)
 
-
 export default router

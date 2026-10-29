@@ -1,24 +1,21 @@
-const nomes = new Array ("Ana", "Batata", "João")
+import database from "../config/database.js";
 
 class Pessoa {
-    Buscar() {
-        return nomes
-    }
-    BuscarUM(id) {
-        return nomes[id]
-    }
-
-    Criar(nome) {
-        nomes.push(nome)
-    }
-
-    Alterar(id, nome) {
-        nomes[id] = nome
-    }
-
-    Deletar(id) {
-        nomes.splice(id, 1)
+    constructor() {
+        this.model = database.db.define("pessoa", {
+            id: {
+                type: database.db.Sequelize.INTEGER, 
+                primaryKey: true,
+                autoIncrement: true
+            },
+            nome: {
+                type: database.db.Sequelize.STRING
+            },
+            idade: {
+                type: database.db.Sequelize.INTEGER
+            }
+        })
     }
 }
 
-export default new Pessoa()
+export default new Pessoa().model
